@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  mysqldb:
+    image: mysql:5.7
+    container_name: mysqldb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: dockerdemo
+      MYSQL_USER: sa
+      MYSQL_PASSWORD: 1234  
+      
+  dockerdemo:
+    build: .
+    image: dockerdemo
+    container_name: dockerdemo
+    ports:
+      - 8080:8080
+    environment:
+       - manju=from docker environment    
+    depends_on:
+      - mysqldb
+       
